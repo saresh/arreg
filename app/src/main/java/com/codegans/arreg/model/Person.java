@@ -103,6 +103,22 @@ public final class Person {
         return bloodRhD;
     }
 
+    public List<VacationTransfer> vacationTransfers() {
+        return vacationTransfers;
+    }
+
+    public List<MedicalTransfer> medicalTransfers() {
+        return medicalTransfers;
+    }
+
+    public List<RegularTransfer> regularTransfers() {
+        return regularTransfers;
+    }
+
+    public List<AssessmentTransfer> assessmentTransfers() {
+        return assessmentTransfers;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;

@@ -1,8 +1,6 @@
 package com.codegans.arreg.service;
 
-import com.codegans.arreg.model.BloodGroup;
-import com.codegans.arreg.model.BloodRhD;
-import com.codegans.arreg.model.Person;
+import com.codegans.arreg.model.*;
 import com.codegans.arreg.model.dto.PersonDto;
 import com.codegans.arreg.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +23,8 @@ public class PersonnelService {
 
     public PersonDto getById(String id) {
         Person person = personRepository.findById(UUID.fromString(id)).orElse(null);
+        List<RegularTransfer> transfers = person.regularTransfers();
+        String reason = transfers.get(0).reason().toString();
         return person != null ? new PersonDto(person) : null;
     }
 
