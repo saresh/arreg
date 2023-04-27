@@ -25,10 +25,6 @@ public class PersonnelService {
 
     public PersonDto getById(String id) {
         Person person = personRepository.findById(UUID.fromString(id)).orElse(null);
-        List<RegularTransfer> transfers = person.regularTransfers();
-        if (!transfers.isEmpty()) {
-            String reason = transfers.get(0).reason().toString();
-        }
         return person != null ? new PersonDto(person) : null;
     }
 
