@@ -3,6 +3,7 @@ package com.codegans.arreg.service;
 import com.codegans.arreg.model.*;
 import com.codegans.arreg.model.dto.PersonDto;
 import com.codegans.arreg.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PersonnelService {
     private final PersonRepository personRepository;
 
@@ -24,7 +26,9 @@ public class PersonnelService {
     public PersonDto getById(String id) {
         Person person = personRepository.findById(UUID.fromString(id)).orElse(null);
         List<RegularTransfer> transfers = person.regularTransfers();
-        String reason = transfers.get(0).reason().toString();
+        if (!transfers.isEmpty()) {
+            String reason = transfers.get(0).reason().toString();
+        }
         return person != null ? new PersonDto(person) : null;
     }
 
